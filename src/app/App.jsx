@@ -31,7 +31,9 @@ export default class App extends React.Component{
         }else{
             return(
                 <div className="container-fluid">
-                    <Menu slidein={() => this.slidein} logout={this.logout}/>
+                    <div className="row">
+                        <Menu slidein={() => this.slidein} logout={this.logout}/>
+                    </div>
                     <Router>
                         <Switch>
                             <Route exact path="/dashboard/resumo"><Resumo /></Route>

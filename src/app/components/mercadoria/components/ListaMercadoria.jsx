@@ -24,8 +24,8 @@ export default props =>
                         return(
                             <tr>
                                 <td>{mercadoria.nome}</td>
-                                <td>{mercadoria.precoCompra}</td>
-                                <td>{mercadoria.precoVenda}</td>
+                                <td>{mercadoria.precoCompra.toString().replace('.',',')}</td>
+                                <td>{mercadoria.precoVenda.toString().replace('.',',')}</td>
                                 <td>
                                     <button className="btn btn-danger" idmercadoria={mercadoria.id} onClick={props.deletaMercadoria()}>X</button>
                                 </td>

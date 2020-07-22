@@ -14,17 +14,20 @@ export default class Component extends React.Component {
         this.changeStatusToOne = this.changeStatusToOne.bind(this);
         this.changeStatusToZero = this.changeStatusToZero.bind(this);
         this.deletaMercadoria = this.deletaMercadoria.bind(this);
+        this.mascaraValor = this.mascaraValor.bind(this);
     }
 
     async componentDidMount() {
-        try{
-            const result = await fetch('http://localhost:3333/mercadoria/' + sessionStorage.getItem('token'));
-            const json = await result.json();
-            this.setState({ mercadorias: json });
-        }catch(erro){
+        
+        const result = await fetch('http://localhost:3333/mercadoria/' + sessionStorage.getItem('token'));
+        const json = await result.json();
+        if(json.success === true){
+            this.setState({ mercadorias: json.mercadorias });
+        }else if(json.message === "jwt expired"){
             sessionStorage.removeItem('token');
             window.location.reload();
         }
+        
     }
 
     async salvaMercadoria() {
@@ -48,6 +51,9 @@ export default class Component extends React.Component {
                 setTimeout(() => {
                     message.classList.add('d-none')
                 }, 4000)
+            }else if(res.message === "jwt expired"){
+                sessionStorage.removeItem('token');
+                window.location.reload();
             }
         })
     }
@@ -75,8 +81,15 @@ export default class Component extends React.Component {
         }).then(result => {
             if (result.success) {
                 window.location.reload();
+            }else if(result.message === "jwt expired"){
+                sessionStorage.removeItem('token');
+                window.location.reload();
             }
         })
+    }
+
+    mascaraValor(e){
+        console.log(e.target.value)
     }
 
     render() {
@@ -89,7 +102,7 @@ export default class Component extends React.Component {
         } else {
             return (
                 <div className="row">
-                    <FormMercadoria salvaMercadoria={this.salvaMercadoria} changeStatus={this.changeStatusToZero} />
+                    <FormMercadoria salvaMercadoria={this.salvaMercadoria} changeStatus={this.changeStatusToZero} mascaraValor={(e) => this.mascaraValor}/>
                 </div>
             )
         }
