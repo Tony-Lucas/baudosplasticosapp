@@ -2,48 +2,50 @@ import React from 'react'
 import Menu from '../templates/menu';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../css/style.css';
-import {BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './components/login/login';
-import Resumo from './components/resumo/resumo';
 import Mercadorias from './components/mercadoria/mercadoria';
 import Notas from './components/notas/Notas';
+import Relatorios from './components/relatorio/Relatorios';
 
-export default class App extends React.Component{
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    slidein(){
+    slidein() {
         const menu = document.getElementById('menu-mobile');
         menu.classList.toggle('d-sm-none');
     }
 
-    logout(){
+    logout() {
         sessionStorage.removeItem('token');
         window.location.reload();
     }
 
-    render(){
-        
-        if(!sessionStorage.getItem('token')){
+    render() {
+        if (!sessionStorage.getItem('token')) {
             return (
-                <div class="container-fluid">
+                <div className="container-fluid">
                     <Login />
                 </div>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <div className="container-fluid">
                     <div className="row">
-                        <Menu slidein={() => this.slidein} logout={this.logout}/>
+                        <Menu logout={this.logout} slidein={this.slidein}/>
                     </div>
                     <Router>
                         <Switch>
-                            <Route exact path="/dashboard/resumo"><Resumo /></Route>
-                            <Route path="/dashboard/mercadorias"><Mercadorias /></Route>  
-                            <Route path="/dashboard/notas"><Notas /></Route>  
+                            <Route path="/dashboard/mercadorias"><Mercadorias /></Route>
+                            <Route path="/dashboard/notas"><Notas /></Route>
+                            <Route path="/dashboard/relatorios"><Relatorios /></Route>
                         </Switch>
                     </Router>
                 </div>
             )
         }
-        
+
     }
 }

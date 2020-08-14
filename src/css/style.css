@@ -41,9 +41,27 @@
     }
 }
 
+.alturamax{
+    height: 100vh;
+}
+
 .menu-mobile{
-    z-index: 10;
+    z-index: 100;
     animation: slidein 0.5s forwards;
+}
+
+.alturatabela{
+    height: 500px;
+    overflow: auto;
+}
+
+.alturalista{
+    height: 350px;
+    overflow: auto;
+}
+
+.listaMercadoria{
+    z-index: 10;
 }
 
 .bg-blue{
@@ -52,6 +70,10 @@
 
 .bg-darkblue{
     background-color: #2885BF;
+}
+
+.bg-darkdarkblue{
+    background-color: #2374A6;
 }
 
 .bg-grey{
@@ -79,6 +101,17 @@ h2{
 .bold{
     font-family:montserratbold;
     font-size: 1em;
+}
+.hover-mercadoria:hover{
+    background-color: #B8B9BA;
+}
+
+.porcima{
+    z-index: 150;
+}
+
+.porbaixo{
+    z-index: 10;
 }
 
 .regular{
