@@ -14,6 +14,7 @@ export default class Login extends React.Component {
         const result = await fetch('http://bdpapiserver-com.umbler.net/login',{
             method:"post",
             headers:{
+                "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json"
             },
             body:JSON.stringify({usuario:usuario,senha:senha})
